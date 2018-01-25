@@ -3,7 +3,7 @@ CXX=g++
 # option par défaut de compilation: -std=c++0x si c++11 n'est pas reconnu
 CXXFLAGS=-pipe -std=c++11 -Wall -Wextra -Wconversion -Wpadded -pedantic -O3
 # liste de l'ensemble des fichiers sources cpp
-SRCS=$(wildcard *.cpp)
+SRCS=prog.cpp mod1.cpp mod2.cpp
 OBJS=$(SRCS:.cpp=.o)
 # bibliothèques supplémentaires (statiques) avec lesquelles compiler
 LDLIBS=
@@ -24,9 +24,14 @@ depend:
 	@makedepend -- $(CXXFLAGS) -- -Y $(SRCS) 2> /dev/null
 	
 clean:
-	rm -f $(OBJS)
+#rm -f $(OBJS)
+	rm -f *.o
 
 mrproper:	clean
 	rm -f $(EXE)
 
 # DO NOT DELETE THIS LINE
+
+prog.o: mod1.h mod2.h
+mod1.o: mod1.h mod2.h
+mod2.o: mod2.h
